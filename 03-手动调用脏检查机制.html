@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+</head>
+
+<body ng-app="myApp" ng-controller="TestController">
+    <p>{{name}}</p>
+    <script src="node_modules/angular/angular.js"></script>
+    <script>
+    angular.module('myApp', [])
+        .controller('TestController', ['$scope','$timeout', function($scope,$timeout) {
+            // setTimeout(function() {
+            //     $scope.name = "初始化";
+            //     $scope.$apply();
+            // }, 100);
+            $timeout(function() {
+                $scope.name = "初始化";
+            }, 100);
+        }])
+    </script>
+</body>
+
+</html>

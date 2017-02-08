@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+</head>
+
+<body>
+    <section class="todoapp">
+        <header class="header">
+            <!-- 利用 form 表达，点击回车会自动触发submit事件 -->
+            <form ng-submit="add()">
+                <input class="new-todo" placeholder="What needs to be done?" autofocus ng-model="newTask">
+            </form>
+        </header>
+        <!-- This section should be hidden by default and shown when there are todos -->
+        <section class="main">
+            <input class="toggle-all" type="checkbox" ng-model="isCheckedAll" ng-click="selectAll()">
+            <ul class="todo-list">
+                <!-- List items should get the class `editing` when editing and `completed` when marked as completed -->
+                <!-- editing 表示修改的状态 -->
+                <!-- completed 表示已经完成任务的状态 -->
+                <li ng-repeat="value in todoList | filter:status track by $index" ng-class="{'completed':value.isCompleted,'editing': value.id === updateId}">
+                    <div class="view">
+                        <input class="toggle" type="checkbox" ng-model="value.isCompleted">
+                        <label ng-dblclick="update(value.id)">{{value.name}}</label>
+                        <button class="destroy" ng-click="remove(value.id)"></button>
+                    </div>
+                    <!-- 双击li编辑的时候这个input会显示 -->
+                    <form action="#" ng-submit="save()">
+                        <input class="edit" ng-model="value.name">
+                    </form>
+                </li>
+            </ul>
+        </section>
+        <footer class="footer">
+            <!-- This should be `0 items left` by default -->
+            <span class="todo-count"><strong ng-bind="getCount()"></strong> item left</span>
+            <!-- Remove this if you don't implement routing -->
+            <ul class="filters">
+                <li>
+                    <a ng-class="{'selected':status.isCompleted == undefined}" href="#/">All</a>
+                </li>
+                <li>
+                    <a ng-class="{'selected':status.isCompleted == false}" href="#/active">Active</a>
+                </li>
+                <li>
+                    <a ng-class="{'selected':status.isCompleted == true}" href="#/completed">Completed</a>
+                </li>
+            </ul>
+            <!-- Hidden if no completed items are left ↓ -->
+            <button class="clear-completed" ng-click="clearCompleted()" ng-show="isShow()">Clear completed</button>
+        </footer>
+    </section>
+</body>
+
+</html>

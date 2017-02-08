@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+</head>
+
+<body ng-app="myApp" ng-controller="TestController">
+    <!-- filter 是对每一条数据来进行过滤的 -->
+    <div ng-repeat="item in list | filter:{isCompleted: true}"></div>
+    <p>{{123456789 | currency : '$'}}</p>
+    <p>{{123456789 | date : 'yyyy-mm-dd'}}</p>
+    <pre>
+    	{{([{name:'小明',age:18},{name:'小明',age:18},{name:'小明',age:18}]) | json:2}}
+    </pre>
+    <p>{{'今天天气很好哈哈哈哈哈哈哈哈' | limitTo:5}}...</p>
+    <p>{{'MATH' | lowercase}}</p>
+    <p>{{'math' | uppercase}}</p>
+    <p>{{42342434212345.689 | number}}</p>
+    <div ng-repeat="item in [1,2,3,4] |orderBy:false">{{item}}</div>
+    <div ng-repeat="item in [{id:1},{id:4},{id:2},{id:3}] |orderBy:'-id'">{{item.id}}</div>
+    <script src="node_modules/angular/angular.js"></script>
+    <script>
+    angular.module('myApp', [])
+        .controller('TestController', ['$scope', function($scope) {
+            $scope.arr = [1, 3, 5, 2, 4];
+        }])
+    </script>
+</body>
+
+</html>

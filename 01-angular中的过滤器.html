@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+</head>
+
+<body ng-app="filterApp" ng-controller="FilterController">
+    <div ng-repeat="value in todoList | filter:false">
+        {{value}}
+    </div>
+    <script src="node_modules/angular/angular.js"></script>
+    <script>
+    // 过滤器
+    // 生活中过滤器: 水杯中的过滤网
+    // angular中的过滤器
+    // 1.对数据进行筛选, 一般会配合ng-repeat完成一些操作
+    // 2.对数据进行格式化处理
+
+    // 过滤器的符号:  |
+    // 过滤器后面加冒号(:) 表示当前过滤器的参数
+    // 参数 表示过滤的条件
+    // 如果参数为普通值(基本类型):此值会进行全文搜索
+    // 如果参数为复杂类型: 此时只会查看对象中对应的属性是否符合
+    var filterApp = angular.module('filterApp', []);
+    filterApp.controller('FilterController', ['$scope', function($scope) {
+        // 1 展示任务列表
+        // 思路: 创建一个数据列表, 然后通过 ng-repeat 指令将数据进行展示
+        $scope.todoList = [
+            // id：唯一的标识
+            // name：任务名称
+            // isCompleted：用来表示当前任务的状态
+            {
+                id: 0,
+                name: '吃饭',
+                isCompleted: false
+            }, {
+                id: 1,
+                name: '睡觉',
+                isCompleted: true
+            }, {
+                id: 2,
+                name: '学习',
+                isCompleted: false
+            }, {
+                id: 3,
+                name: '打豆豆',
+                isCompleted: false
+            }
+        ];
+    }]);
+    </script>
+</body>
+
+</html>
